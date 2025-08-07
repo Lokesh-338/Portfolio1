@@ -76,6 +76,19 @@
             border-radius: 0.25rem;
             font-weight: 400;
         }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .scrolling-wrapper {
+            display: flex;
+            width: fit-content;
+            animation: scroll 60s linear infinite;
+        }
+        .portfolio-container:hover .scrolling-wrapper {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -127,6 +140,7 @@
                     </p>
                     <div class="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
                         <a href="#portfolio" class="btn-primary font-bold py-3 px-8 text-center">See My Work</a>
+                        <a href="#contact" class="btn-secondary font-semibold py-3 px-8 text-center">Contact Me</a>
                     </div>
                 </div>
                 <div class="p-4">
@@ -136,7 +150,7 @@
         </section>
         
         <!-- About Section -->
-        <section id="about" class="py-24 bg-gray-50">
+        <section id="about" class="py-24 bg-pink-50">
              <div class="container mx-auto px-6">
                 <div class="text-center">
                     <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">About Me</span></h2>
@@ -195,7 +209,7 @@
                             <span class="font-semibold section-title">Google Gemini</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="veo3.png" alt="Google Veo" class="h-12 w-12 object-contain rounded-full">
+                            <img src="gimini.png" alt="Google Veo" class="h-12 w-12 object-contain rounded-full">
                             <span class="font-semibold section-title">Google Veo</span>
                         </div>
                     </div>
@@ -204,71 +218,87 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="py-24 bg-gray-50">
-             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-3 gap-12">
-                    <div class="md:col-span-1">
-                        <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Featured Projects</span></h2>
-                        <svg class="w-16 h-16 mt-4 text-gray-800" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M83.5 16.5C70.3 21.3 53.5 36.5 50 50C46.5 63.5 58.3 78.3 75 83.5" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M62.5 83.5L75 83.5L75 71" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <p class="mt-4 section-subtitle">I've designed more than 500 projects. Here are a few of my favorites.</p>
+        <section id="portfolio" class="py-24 bg-pink-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Latest Works</span></h2>
+                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">A showcase of my recent projects.</p>
+                </div>
+            </div>
+            <div class="mt-16 w-full overflow-hidden portfolio-container">
+                <div class="scrolling-wrapper">
+                    <!-- Original Set -->
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3><p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p></div>
+                        </a>
                     </div>
-                    <div class="md:col-span-2 grid sm:grid-cols-2 gap-8">
-                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                                <img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3>
-                                <p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p>
-                            </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Animated Explainer</h3><p class="mt-1 text-sm section-subtitle">Engaging animated video.</p></div>
                         </a>
-                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                                <img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Animated Explainer</h3>
-                                <p class="mt-1 text-sm section-subtitle">Engaging animated video.</p>
-                            </div>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Ad';" alt="Social Media Ad" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Social Media Ad</h3><p class="mt-1 text-sm section-subtitle">Short-form ad for social campaigns.</p></div>
                         </a>
-                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" rel="noopener noreferrer" class="block group portfolio-card">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                                <img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Ad';" alt="Social Media Ad" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Social Media Ad</h3>
-                                <p class="mt-1 text-sm section-subtitle">Short-form ad for social campaigns.</p>
-                            </div>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Promo+Video';" alt="Promotional Video" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Promotional Video</h3><p class="mt-1 text-sm section-subtitle">Client promotional campaign video.</p></div>
                         </a>
-                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" rel="noopener noreferrer" class="block group portfolio-card">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                                <img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Promo+Video';" alt="Promotional Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Promotional Video</h3>
-                                <p class="mt-1 text-sm section-subtitle">Client promotional campaign video.</p>
-                            </div>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Short+Form+Video';" alt="Short Form Video" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Short Form Video</h3><p class="mt-1 text-sm section-subtitle">Engaging vertical video content.</p></div>
                         </a>
-                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                                <img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Short+Form+Video';" alt="Short Form Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Short Form Video</h3>
-                                <p class="mt-1 text-sm section-subtitle">Engaging vertical video content.</p>
-                            </div>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Client+Commercial';" alt="Client Commercial" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Client Commercial</h3><p class="mt-1 text-sm section-subtitle">A commercial spot for a client.</p></div>
                         </a>
-                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" rel="noopener noreferrer" class="block group portfolio-card">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                                <img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Client+Commercial';" alt="Client Commercial" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Client Commercial</h3>
-                                <p class="mt-1 text-sm section-subtitle">A commercial spot for a client.</p>
-                            </div>
+                    </div>
+                    <!-- Duplicated Set for seamless scroll -->
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3><p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p></div>
+                        </a>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Animated Explainer</h3><p class="mt-1 text-sm section-subtitle">Engaging animated video.</p></div>
+                        </a>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Ad';" alt="Social Media Ad" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Social Media Ad</h3><p class="mt-1 text-sm section-subtitle">Short-form ad for social campaigns.</p></div>
+                        </a>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Promo+Video';" alt="Promotional Video" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Promotional Video</h3><p class="mt-1 text-sm section-subtitle">Client promotional campaign video.</p></div>
+                        </a>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Short+Form+Video';" alt="Short Form Video" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Short Form Video</h3><p class="mt-1 text-sm section-subtitle">Engaging vertical video content.</p></div>
+                        </a>
+                    </div>
+                    <div class="flex-none w-96 p-4">
+                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
+                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Client+Commercial';" alt="Client Commercial" class="w-full h-full object-cover"></div>
+                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Client Commercial</h3><p class="mt-1 text-sm section-subtitle">A commercial spot for a client.</p></div>
                         </a>
                     </div>
                 </div>
