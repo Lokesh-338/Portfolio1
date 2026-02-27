@@ -12,10 +12,9 @@
         body {
             font-family: 'DM Sans', sans-serif;
             background-color: #FFFFFF;
-            /* New dotted grid background */
             background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0);
             background-size: 25px 25px;
-            color: #1F2937; /* Gray-800 */
+            color: #1F2937;
         }
         .btn-primary {
             background-color: #FBD784;
@@ -28,11 +27,11 @@
             transform: translateY(-2px);
         }
         .section-title {
-            color: #111827; /* Gray-900 */
+            color: #111827;
             font-weight: 700;
         }
         .section-subtitle {
-            color: #4B5563; /* Gray-600 */
+            color: #4B5563;
         }
         .header {
             background-color: rgba(255, 255, 255, 0.8);
@@ -76,18 +75,36 @@
             border-radius: 0.25rem;
             font-weight: 400;
         }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
 
+        /* Scrollable Container Styles */
         .scrolling-wrapper {
             display: flex;
-            width: fit-content;
-            animation: scroll 60s linear infinite;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+            padding-bottom: 20px;
+            gap: 1.5rem;
+            scroll-snap-type: x mandatory;
         }
-        .portfolio-container:hover .scrolling-wrapper {
-            animation-play-state: paused;
+        .scrolling-wrapper::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+        .portfolio-item {
+            flex: 0 0 auto;
+            width: 350px;
+            scroll-snap-align: center;
+        }
+        @media (min-width: 768px) {
+            .portfolio-item {
+                width: 450px;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -101,6 +118,7 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#experience" class="nav-link">Experience</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <a href="mailto:lokeshshahi8899@gmail.com" class="hidden md:block border border-gray-300 text-gray-800 px-5 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">Email Me</a>
@@ -111,8 +129,9 @@
             </div>
         </nav>
     </header>
-     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white z-50 p-6">
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white z-[60] p-6">
         <div class="flex justify-end">
             <button id="close-btn" class="text-gray-800 text-3xl">&times;</button>
         </div>
@@ -120,6 +139,7 @@
             <a href="#about" class="nav-link">About</a>
             <a href="#skills" class="nav-link">Skills</a>
             <a href="#portfolio" class="nav-link">Portfolio</a>
+            <a href="#experience" class="nav-link">Experience</a>
             <a href="#contact" class="nav-link">Contact</a>
             <a href="mailto:lokeshshahi8899@gmail.com" class="mt-4 btn-primary px-8 py-3">Email Me</a>
         </div>
@@ -140,11 +160,14 @@
                     </p>
                     <div class="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
                         <a href="#portfolio" class="btn-primary font-bold py-3 px-8 text-center">See My Work</a>
-                        <a href="#contact" class="btn-secondary font-semibold py-3 px-8 text-center">Contact Me</a>
+                        <a href="#contact" class="border border-gray-300 font-semibold py-3 px-8 text-center rounded-lg hover:bg-gray-50 transition-colors">Contact Me</a>
                     </div>
                 </div>
-                <div class="p-4">
-                     <img src="lokesh.jpg" alt="Lokesh Singh Shahi" class="rounded-2xl w-full h-auto object-cover shadow-2xl">
+                <div class="p-4 flex justify-center">
+                     <div class="relative w-full max-w-md">
+                        <img src="photo_lokesh.jpeg" onerror="this.src='https://placehold.co/600x800/E5E7EB/1F2937?text=Lokesh+Shahi'" alt="Lokesh Singh Shahi" class="rounded-2xl w-full h-auto object-cover shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+                     </div>
                 </div>
             </div>
         </section>
@@ -154,7 +177,7 @@
              <div class="container mx-auto px-6">
                 <div class="text-center">
                     <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">About Me</span></h2>
-                    <p class="mt-4 max-w-3xl mx-auto section-subtitle text-lg">
+                    <p class="mt-8 max-w-3xl mx-auto section-subtitle text-lg leading-relaxed">
                         With a Bachelor of Science in Animation and Gaming, I have a deep-rooted passion for visual storytelling. My expertise lies in video editing and graphic design, where I merge technical proficiency with a keen artistic eye. I am dedicated to producing high-quality, impactful content and am always exploring new technologies, including AI, to push the boundaries of creativity.
                     </p>
                 </div>
@@ -168,48 +191,50 @@
                     <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">My Capabilities</span></h2>
                     <p class="mt-4 max-w-2xl mx-auto section-subtitle">A look into the primary tools and technologies I use to bring ideas to life.</p>
                 </div>
+                
                 <div class="mt-16">
                     <h3 class="text-2xl font-bold section-title text-center mb-8">Creative Software</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="photoshop.png" alt="Photoshop" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title">Photoshop</span>
+                            <img src="photoshop.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg'" alt="Photoshop" class="h-12 w-12 object-contain">
+                            <span class="font-semibold section-title text-sm">Photoshop</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="premiere-pro_5968525.png" alt="Premiere Pro" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title">Premiere Pro</span>
+                            <img src="premiere-pro_5968525.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg'" alt="Premiere Pro" class="h-12 w-12 object-contain">
+                            <span class="font-semibold section-title text-sm">Premiere Pro</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="after-effects.png" alt="After Effects" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title">After Effects</span>
+                            <img src="after-effects.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg'" alt="After Effects" class="h-12 w-12 object-contain">
+                            <span class="font-semibold section-title text-sm">After Effects</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="illustrator_5611037.png" alt="Illustrator" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title">Illustrator</span>
+                            <img src="illustrator_5611037.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg'" alt="Illustrator" class="h-12 w-12 object-contain">
+                            <span class="font-semibold section-title text-sm">Illustrator</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="maya.png" alt="Maya" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title">Autodesk Maya</span>
+                            <img src="maya.png" onerror="this.src='https://placehold.co/48x48/1F2937/FFFFFF?text=Maya'" alt="Maya" class="h-12 w-12 object-contain">
+                            <span class="font-semibold section-title text-sm">Autodesk Maya</span>
                         </div>
                          <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="3dx.png" alt="3ds Max" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title">3ds Max</span>
+                            <img src="3dx.png" onerror="this.src='https://placehold.co/48x48/1F2937/FFFFFF?text=3DS'" alt="3ds Max" class="h-12 w-12 object-contain">
+                            <span class="font-semibold section-title text-sm">3ds Max</span>
                         </div>
                     </div>
                 </div>
+
                  <div class="mt-16">
                     <h3 class="text-2xl font-bold section-title text-center mb-8">AI & Generative Tools</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-xl mx-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="chat gtp.png" alt="ChatGPT" class="h-12 w-12 object-contain rounded-full">
+                            <div class="h-12 w-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold">GPT</div>
                             <span class="font-semibold section-title">ChatGPT</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="gimini.png" alt="Gemini" class="h-12 w-12 object-contain">
+                            <div class="h-12 w-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">GEM</div>
                             <span class="font-semibold section-title">Google Gemini</span>
                         </div>
                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="veo3.png" alt="Google Veo" class="h-12 w-12 object-contain rounded-full">
+                            <div class="h-12 w-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">VEO</div>
                             <span class="font-semibold section-title">Google Veo</span>
                         </div>
                     </div>
@@ -218,87 +243,128 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="py-24 bg-pink-50">
+        <section id="portfolio" class="py-24 bg-pink-50 overflow-hidden">
             <div class="container mx-auto px-6">
                 <div class="text-center">
                     <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Latest Works</span></h2>
-                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">A showcase of my recent projects.</p>
+                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">Scroll horizontally with your mouse wheel or swipe to explore my projects.</p>
                 </div>
             </div>
-            <div class="mt-16 w-full overflow-hidden portfolio-container">
-                <div class="scrolling-wrapper">
-                    <!-- Original Set -->
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3><p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p></div>
+            
+            <div class="mt-16 px-6">
+                <div class="scrolling-wrapper" id="portfolio-scroll">
+                    <!-- Unique Items only (No duplication needed for manual scroll) -->
+                    
+                    <!-- New YT Short 1 -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/Qedxs7BpIQA?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Short';" alt="YouTube Short" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Short Form Content</h3>
+                                <p class="mt-1 text-sm section-subtitle">Dynamic vertical video editing.</p>
+                            </div>
                         </a>
                     </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Animated Explainer</h3><p class="mt-1 text-sm section-subtitle">Engaging animated video.</p></div>
+                    
+                    <!-- New YT Short 2 -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/b6aTsgl7yq0?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Short';" alt="YouTube Short" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Social Media Reel</h3>
+                                <p class="mt-1 text-sm section-subtitle">Fast-paced storytelling for mobile.</p>
+                            </div>
                         </a>
                     </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Ad';" alt="Social Media Ad" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Social Media Ad</h3><p class="mt-1 text-sm section-subtitle">Short-form ad for social campaigns.</p></div>
+
+                    <!-- Viral FB Reel 1.4M -->
+                    <div class="portfolio-item">
+                        <a href="https://www.facebook.com/share/v/185wkttvKA/" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-blue-600 flex items-center justify-center overflow-hidden relative">
+                                <img src="https://placehold.co/600x400/1877F2/FFFFFF?text=1.4M+Views+Viral+Reel" alt="Viral FB Reel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="text-white font-bold border-2 border-white px-4 py-2 rounded">Watch Reel</span>
+                                </div>
+                            </div>
+                            <div class="p-5 bg-white">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-lg font-bold section-title">Viral FB Reel</h3>
+                                    <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">1.4M+ VIEWS</span>
+                                </div>
+                                <p class="mt-1 text-sm section-subtitle">Mother of Sarcasm - High Retention Editing.</p>
+                            </div>
                         </a>
                     </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Promo+Video';" alt="Promotional Video" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Promotional Video</h3><p class="mt-1 text-sm section-subtitle">Client promotional campaign video.</p></div>
+
+                    <!-- New YT Video -->
+                    <div class="portfolio-item">
+                        <a href="https://youtu.be/jVitswVkZHg" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Video+Project';" alt="YouTube Video" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Promotional Project</h3>
+                                <p class="mt-1 text-sm section-subtitle">Professional high-quality video production.</p>
+                            </div>
                         </a>
                     </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Short+Form+Video';" alt="Short Form Video" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Short Form Video</h3><p class="mt-1 text-sm section-subtitle">Engaging vertical video content.</p></div>
+
+                    <!-- FB Reel 42K -->
+                    <div class="portfolio-item">
+                        <a href="https://www.facebook.com/share/v/1AbGBsBQny/" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-blue-500 flex items-center justify-center overflow-hidden relative">
+                                <img src="https://placehold.co/600x400/4267B2/FFFFFF?text=Viral+Social+Content" alt="Facebook Reel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-lg font-bold section-title">Organic Growth Reel</h3>
+                                    <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">42K+ VIEWS</span>
+                                </div>
+                                <p class="mt-1 text-sm section-subtitle">Trend-based audio & comedic timing.</p>
+                            </div>
                         </a>
                     </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Client+Commercial';" alt="Client Commercial" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Client Commercial</h3><p class="mt-1 text-sm section-subtitle">A commercial spot for a client.</p></div>
+
+                    <!-- New YT Short 3 -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/w7uVnSw69xA?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Short';" alt="YouTube Short" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Creative Short</h3>
+                                <p class="mt-1 text-sm section-subtitle">Engaging visual sequences.</p>
+                            </div>
                         </a>
                     </div>
-                    <!-- Duplicated Set for seamless scroll -->
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3><p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p></div>
+
+                    <!-- Motion Graphics Reel -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3>
+                                <p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p>
+                            </div>
                         </a>
                     </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Animated Explainer</h3><p class="mt-1 text-sm section-subtitle">Engaging animated video.</p></div>
-                        </a>
-                    </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Ad';" alt="Social Media Ad" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Social Media Ad</h3><p class="mt-1 text-sm section-subtitle">Short-form ad for social campaigns.</p></div>
-                        </a>
-                    </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Promo+Video';" alt="Promotional Video" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Promotional Video</h3><p class="mt-1 text-sm section-subtitle">Client promotional campaign video.</p></div>
-                        </a>
-                    </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Short+Form+Video';" alt="Short Form Video" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Short Form Video</h3><p class="mt-1 text-sm section-subtitle">Engaging vertical video content.</p></div>
-                        </a>
-                    </div>
-                    <div class="flex-none w-96 p-4">
-                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" rel="noopener noreferrer" class="block group portfolio-card h-full">
-                            <div class="aspect-w-16 aspect-h-9 bg-gray-200"><img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Client+Commercial';" alt="Client Commercial" class="w-full h-full object-cover"></div>
-                            <div class="p-5 bg-white"><h3 class="text-lg font-bold section-title">Client Commercial</h3><p class="mt-1 text-sm section-subtitle">A commercial spot for a client.</p></div>
+
+                    <!-- Animated Explainer -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Animated Explainer</h3>
+                                <p class="mt-1 text-sm section-subtitle">Engaging animated video production.</p>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -312,29 +378,48 @@
                     <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Experience</span></h2>
                     <p class="mt-4 max-w-2xl mx-auto section-subtitle">My professional background and key accomplishments.</p>
                 </div>
-                <div class="mt-16 max-w-3xl mx-auto space-y-10">
-                    <div class="flex items-start space-x-6">
-                        <div class="text-yellow-500 font-bold text-lg mt-1">01</div>
-                        <div>
+                <div class="mt-16 max-w-3xl mx-auto space-y-12">
+                    <div class="flex items-start space-x-6 group">
+                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">01</div>
+                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
                             <h3 class="text-xl font-bold section-title">Divinetalk</h3>
                             <p class="font-semibold text-gray-500">Video Editor & Motion Graphics Artist <span class="text-gray-400 font-normal">| 2024 - Present</span></p>
-                            <p class="mt-2 text-sm section-subtitle">Leading video production and motion graphics to enhance the brand's digital presence.</p>
-                             <div class="mt-4 flex items-center space-x-4">
-                                <a href="https://www.youtube.com/@divinetalkastrology" target="_blank" rel="noopener noreferrer" title="YouTube" class="text-gray-400 hover:text-gray-800 transition-colors duration-300">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M21.522 6.337a2.502 2.502 0 00-1.76-1.76C18.264 4 12 4 12 4s-6.264 0-7.762.577a2.502 2.502 0 00-1.76 1.76C2 7.835 2 12 2 12s0 4.165.478 5.663a2.502 2.502 0 001.76 1.76C5.736 19.998 12 20 12 20s6.264 0 7.762-.577a2.502 2.502 0 001.76-1.76c.478-1.498.478-5.663.478-5.663s0-4.165-.478-5.663zM9.75 15.5V8.5l6 3.5-6 3.5z" clip-rule="evenodd"></path></svg>
+                            <p class="mt-3 text-base section-subtitle">Leading video production and motion graphics to enhance digital presence. Managed high-engagement social media campaigns and long-form video content.</p>
+                             <div class="mt-5 flex items-center space-x-4">
+                                <a href="https://www.youtube.com/@divinetalkastrology" target="_blank" class="text-gray-400 hover:text-red-600 transition-colors">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M21.522 6.337a2.502 2.502 0 00-1.76-1.76C18.264 4 12 4 12 4s-6.264 0-7.762.577a2.502 2.502 0 00-1.76 1.76C2 7.835 2 12 2 12s0 4.165.478 5.663a2.502 2.502 0 001.76 1.76C5.736 19.998 12 20 12 20s6.264 0 7.762-.577a2.502 2.502 0 001.76-1.76c.478-1.498.478-5.663.478-5.663s0-4.165-.478-5.663zM9.75 15.5V8.5l6 3.5-6 3.5z"></path></svg>
                                 </a>
-                                <a href="https://www.instagram.com/divinetalk.in/" target="_blank" rel="noopener noreferrer" title="Instagram" class="text-gray-400 hover:text-gray-800 transition-colors duration-300">
+                                <a href="https://www.instagram.com/divinetalk.in/" target="_blank" class="text-gray-400 hover:text-pink-600 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.441c-3.143 0-3.505.012-4.73.068-2.793.127-3.999 1.332-4.123 4.123-.056 1.225-.067 1.585-.067 4.73s.011 3.505.067 4.73c.124 2.791 1.33 3.996 4.123 4.123 1.225.056 1.585.067 4.73.067s3.505-.011 4.73-.067c2.791-.124 3.996-1.33 4.123-4.123.056-1.225.067-1.585.067-4.73s-.011-3.505-.067-4.73c-.127-2.793-1.332-3.999-4.123-4.123C15.505 3.616 15.143 3.604 12 3.604zm0 4.438c-2.403 0-4.36 1.957-4.36 4.36s1.957 4.36 4.36 4.36 4.36-1.957 4.36-4.36-1.957-4.36-4.36-4.36zm0 7.222c-1.583 0-2.86-1.277-2.86-2.86s1.277-2.86 2.86-2.86 2.86 1.277 2.86 2.86-1.277 2.86-2.86 2.86zm4.838-7.722c-.594 0-1.074.48-1.074 1.074s.48 1.074 1.074 1.074 1.074-.48 1.074-1.074-.48-1.074-1.074-1.074z"></path></svg>
                                 </a>
                             </div>
                         </div>
                     </div>
-                     <div class="flex items-start space-x-6">
-                        <div class="text-yellow-500 font-bold text-lg mt-1">02</div>
-                        <div>
+
+                    <div class="flex items-start space-x-6 group">
+                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">02</div>
+                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                            <h3 class="text-xl font-bold section-title">Mother Of Sarcasm (Facebook)</h3>
+                            <p class="font-semibold text-gray-500">Social Media Video Editor <span class="text-gray-400 font-normal">| Freelance</span></p>
+                            <p class="mt-3 text-base section-subtitle">Edited multiple reel-style videos focusing on high-retention pacing, comedic timing, and trend-based audio synchronization. Achieved significant organic growth including a viral video with <strong>1.4M+ views</strong> and <strong>42K+ views</strong> on others.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-6 group">
+                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">03</div>
+                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
+                            <h3 class="text-xl font-bold section-title">Vertical TV</h3>
+                            <p class="font-semibold text-gray-500">Freelance Video Editor – Promotion Projects <span class="text-gray-400 font-normal">| Freelance</span></p>
+                            <p class="mt-3 text-base section-subtitle">Edited over <strong>200+ promotional videos</strong> specializing in fast-paced vertical storytelling optimized for mobile consumption. Created dynamic ad-style videos and high-impact visual sequences tailored for short-form platforms.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-6 group">
+                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">04</div>
+                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
                             <h3 class="text-xl font-bold section-title">My Little Genie</h3>
                             <p class="font-semibold text-gray-500">Animation & Video Editor <span class="text-gray-400 font-normal">| 2023</span></p>
-                            <p class="mt-2 text-sm section-subtitle">Managed the full production pipeline for animated content, driving social media growth.</p>
+                            <p class="mt-3 text-base section-subtitle">Managed the full production pipeline for animated content, driving social media growth through storytelling and consistent branding.</p>
                         </div>
                     </div>
                 </div>
@@ -344,21 +429,21 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="py-20 bg-gray-900 text-white">
+    <footer id="contact" class="py-24 bg-gray-900 text-white">
         <div class="container mx-auto px-6 text-center">
             <div class="max-w-2xl mx-auto">
-                 <h2 class="text-3xl md:text-4xl font-bold text-white">Let's Work Together</h2>
-                 <p class="mt-4 text-lg text-gray-300">Have a project in mind? I'm available for freelance and full-time opportunities. Let's create something amazing.</p>
-                 <div class="mt-8">
-                    <a href="mailto:lokeshshahi8899@gmail.com" class="btn-primary inline-block font-bold py-4 px-12 text-lg">lokeshshahi8899@gmail.com</a>
+                 <h2 class="text-3xl md:text-5xl font-bold text-white">Let's Work Together</h2>
+                 <p class="mt-6 text-lg text-gray-300">Have a project in mind? I'm available for freelance and full-time opportunities. Let's create something amazing.</p>
+                 <div class="mt-12">
+                    <a href="mailto:lokeshshahi8899@gmail.com" class="btn-primary inline-block font-bold py-4 px-12 text-lg transition-all hover:px-16">lokeshshahi8899@gmail.com</a>
                  </div>
             </div>
-            <div class="mt-20 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-                <p>&copy; 2024 Lokesh Singh Shahi</p>
-                 <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="https://www.linkedin.com/in/lokesh-shahi-99aaa4215/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
-                    <a href="https://www.instagram.com/3.skeleton/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
-                    <a href="https://wa.me/7456834443" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">WhatsApp</a>
+            <div class="mt-20 pt-10 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+                <p>&copy; 2024 Lokesh Singh Shahi. All rights reserved.</p>
+                 <div class="flex space-x-8 mt-6 md:mt-0">
+                    <a href="https://www.linkedin.com/in/lokesh-shahi-99aaa4215/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://www.instagram.com/3.skeleton/" target="_blank" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="https://wa.me/7456834443" target="_blank" class="hover:text-white transition-colors">WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -373,12 +458,27 @@
 
         function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
+            document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
         }
 
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
         navLinks.forEach(link => {
             link.addEventListener('click', toggleMenu);
+        });
+
+        // Mouse Wheel Horizontal Scroll Logic
+        const scrollContainer = document.getElementById('portfolio-scroll');
+        
+        scrollContainer.addEventListener('wheel', (evt) => {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY * 2; // Adjust speed multiplier as needed
+        }, { passive: false });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                toggleMenu();
+            }
         });
     </script>
 
