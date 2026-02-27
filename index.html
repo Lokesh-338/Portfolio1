@@ -76,25 +76,43 @@
             font-weight: 400;
         }
 
-        /* Scrollable Container Styles */
+        /* Infinite Scroll Animation */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .portfolio-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
         .scrolling-wrapper {
             display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE and Edge */
+            width: fit-content;
+            animation: scroll 100s linear infinite;
             padding-bottom: 20px;
-            gap: 1.5rem;
-            scroll-snap-type: x mandatory;
         }
-        .scrolling-wrapper::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+
+        .portfolio-container:hover .scrolling-wrapper {
+            animation-play-state: paused;
         }
+
+        /* Support for manual scroll via JS while maintaining animation */
+        .scrolling-wrapper-outer {
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scrolling-wrapper-outer::-webkit-scrollbar {
+            display: none;
+        }
+
         .portfolio-item {
             flex: 0 0 auto;
             width: 350px;
-            scroll-snap-align: center;
+            padding: 1rem;
         }
         @media (min-width: 768px) {
             .portfolio-item {
@@ -247,19 +265,18 @@
             <div class="container mx-auto px-6">
                 <div class="text-center">
                     <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Latest Works</span></h2>
-                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">Scroll horizontally with your mouse wheel or swipe to explore my projects.</p>
+                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">Automatic infinite scroll restored. You can also use your mouse wheel to explore.</p>
                 </div>
             </div>
             
-            <div class="mt-16 px-6">
+            <div class="mt-16 portfolio-container">
                 <div class="scrolling-wrapper" id="portfolio-scroll">
-                    <!-- Unique Items only (No duplication needed for manual scroll) -->
-                    
-                    <!-- New YT Short 1 -->
+                    <!-- Complete Set (Items 1-12) -->
+                    <!-- 1. Viral YT Short 1 -->
                     <div class="portfolio-item">
                         <a href="https://youtube.com/shorts/Qedxs7BpIQA?feature=share" target="_blank" class="block group portfolio-card h-full">
                             <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Short';" alt="YouTube Short" class="w-full h-full object-cover">
+                                <img src="https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg" alt="YouTube Short" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 bg-white">
                                 <h3 class="text-lg font-bold section-title">Short Form Content</h3>
@@ -267,12 +284,11 @@
                             </div>
                         </a>
                     </div>
-                    
-                    <!-- New YT Short 2 -->
+                    <!-- 2. Viral YT Short 2 -->
                     <div class="portfolio-item">
                         <a href="https://youtube.com/shorts/b6aTsgl7yq0?feature=share" target="_blank" class="block group portfolio-card h-full">
                             <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Short';" alt="YouTube Short" class="w-full h-full object-cover">
+                                <img src="https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg" alt="YouTube Short" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 bg-white">
                                 <h3 class="text-lg font-bold section-title">Social Media Reel</h3>
@@ -280,60 +296,48 @@
                             </div>
                         </a>
                     </div>
-
-                    <!-- Viral FB Reel 1.4M -->
+                    <!-- 3. Viral FB Reel 1.4M -->
                     <div class="portfolio-item">
                         <a href="https://www.facebook.com/share/v/185wkttvKA/" target="_blank" class="block group portfolio-card h-full">
                             <div class="aspect-video bg-blue-600 flex items-center justify-center overflow-hidden relative">
-                                <img src="https://placehold.co/600x400/1877F2/FFFFFF?text=1.4M+Views+Viral+Reel" alt="Viral FB Reel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span class="text-white font-bold border-2 border-white px-4 py-2 rounded">Watch Reel</span>
-                                </div>
+                                <img src="https://placehold.co/600x400/1877F2/FFFFFF?text=1.4M+Views+Viral+Reel" alt="Viral FB Reel" class="w-full h-full object-cover">
+                                <div class="absolute top-2 right-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded">1.4M VIEWS</div>
                             </div>
                             <div class="p-5 bg-white">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="text-lg font-bold section-title">Viral FB Reel</h3>
-                                    <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">1.4M+ VIEWS</span>
-                                </div>
-                                <p class="mt-1 text-sm section-subtitle">Mother of Sarcasm - High Retention Editing.</p>
+                                <h3 class="text-lg font-bold section-title">Viral FB Reel</h3>
+                                <p class="mt-1 text-sm section-subtitle">Mother of Sarcasm - High Retention.</p>
                             </div>
                         </a>
                     </div>
-
-                    <!-- New YT Video -->
+                    <!-- 4. Viral YT Video -->
                     <div class="portfolio-item">
                         <a href="https://youtu.be/jVitswVkZHg" target="_blank" class="block group portfolio-card h-full">
                             <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Video+Project';" alt="YouTube Video" class="w-full h-full object-cover">
+                                <img src="https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg" alt="YouTube Video" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 bg-white">
                                 <h3 class="text-lg font-bold section-title">Promotional Project</h3>
-                                <p class="mt-1 text-sm section-subtitle">Professional high-quality video production.</p>
+                                <p class="mt-1 text-sm section-subtitle">Professional high-quality production.</p>
                             </div>
                         </a>
                     </div>
-
-                    <!-- FB Reel 42K -->
+                    <!-- 5. FB Reel 42K -->
                     <div class="portfolio-item">
                         <a href="https://www.facebook.com/share/v/1AbGBsBQny/" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-blue-500 flex items-center justify-center overflow-hidden relative">
-                                <img src="https://placehold.co/600x400/4267B2/FFFFFF?text=Viral+Social+Content" alt="Facebook Reel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="aspect-video bg-blue-500">
+                                <img src="https://placehold.co/600x400/4267B2/FFFFFF?text=Viral+Social+Content" alt="Facebook Reel" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 bg-white">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="text-lg font-bold section-title">Organic Growth Reel</h3>
-                                    <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">42K+ VIEWS</span>
-                                </div>
-                                <p class="mt-1 text-sm section-subtitle">Trend-based audio & comedic timing.</p>
+                                <h3 class="text-lg font-bold section-title">Organic Growth Reel</h3>
+                                <p class="mt-1 text-sm section-subtitle">Comedic timing & audio sync.</p>
                             </div>
                         </a>
                     </div>
-
-                    <!-- New YT Short 3 -->
+                    <!-- 6. YT Short 3 -->
                     <div class="portfolio-item">
                         <a href="https://youtube.com/shorts/w7uVnSw69xA?feature=share" target="_blank" class="block group portfolio-card h-full">
                             <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Social+Media+Short';" alt="YouTube Short" class="w-full h-full object-cover">
+                                <img src="https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg" alt="YouTube Short" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 bg-white">
                                 <h3 class="text-lg font-bold section-title">Creative Short</h3>
@@ -341,32 +345,92 @@
                             </div>
                         </a>
                     </div>
-
-                    <!-- Motion Graphics Reel -->
+                    <!-- 7. Original Motion Graphics Reel -->
                     <div class="portfolio-item">
                         <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" class="block group portfolio-card h-full">
                             <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Motion+Graphics';" alt="Motion Graphics Reel" class="w-full h-full object-cover">
+                                <img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" alt="Motion Graphics" class="w-full h-full object-cover">
                             </div>
                             <div class="p-5 bg-white">
                                 <h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3>
-                                <p class="mt-1 text-sm section-subtitle">Dynamic motion graphics compilation.</p>
+                                <p class="mt-1 text-sm section-subtitle">Dynamic graphics compilation.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- 8. Original Animated Explainer -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" alt="Animated Video" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Animated Explainer</h3>
+                                <p class="mt-1 text-sm section-subtitle">Storytelling via animation.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- 9. Social Media Ad -->
+                    <div class="portfolio-item">
+                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" alt="Social Media Ad" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Social Media Ad</h3>
+                                <p class="mt-1 text-sm section-subtitle">Short-form campaign ad.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- 10. Promo Video -->
+                    <div class="portfolio-item">
+                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" alt="Promo Video" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Promotional Video</h3>
+                                <p class="mt-1 text-sm section-subtitle">Client campaign content.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- 11. Short Form Vertical -->
+                    <div class="portfolio-item">
+                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" alt="Short Form" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Vertical Content</h3>
+                                <p class="mt-1 text-sm section-subtitle">Engaging mobile video.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- 12. Client Commercial -->
+                    <div class="portfolio-item">
+                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" class="block group portfolio-card h-full">
+                            <div class="aspect-video bg-gray-200">
+                                <img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" alt="Commercial" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 bg-white">
+                                <h3 class="text-lg font-bold section-title">Client Commercial</h3>
+                                <p class="mt-1 text-sm section-subtitle">Commercial spot production.</p>
                             </div>
                         </a>
                     </div>
 
-                    <!-- Animated Explainer -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" onerror="this.src='https://placehold.co/600x400/F4F5F7/3A3A3A?text=Animated+Video';" alt="Animated Explainer Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Animated Explainer</h3>
-                                <p class="mt-1 text-sm section-subtitle">Engaging animated video production.</p>
-                            </div>
-                        </a>
-                    </div>
+                    <!-- DUPLICATED SET FOR INFINITE SCROLL -->
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Short Form Content</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Social Media Reel</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden relative"><img src="https://placehold.co/600x400/1877F2/FFFFFF?text=1.4M+Views" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Viral FB Reel</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Promotional Project</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://placehold.co/600x400/4267B2/FFFFFF?text=Viral+Social" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Organic Growth Reel</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Creative Short</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Motion Graphics Reel</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Animated Explainer</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Social Media Ad</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Promotional Video</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Vertical Content</h3></div></div></div>
+                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Client Commercial</h3></div></div></div>
                 </div>
             </div>
         </section>
@@ -467,12 +531,14 @@
             link.addEventListener('click', toggleMenu);
         });
 
-        // Mouse Wheel Horizontal Scroll Logic
+        // Mouse Wheel Horizontal Scroll Integration
         const scrollContainer = document.getElementById('portfolio-scroll');
         
         scrollContainer.addEventListener('wheel', (evt) => {
+            // Only stop default vertical scroll if user is interacting with the wheel here
             evt.preventDefault();
-            scrollContainer.scrollLeft += evt.deltaY * 2; // Adjust speed multiplier as needed
+            // Manual horizontal shift when wheeling
+            scrollContainer.scrollLeft += evt.deltaY * 3;
         }, { passive: false });
 
         window.addEventListener('keydown', (e) => {
