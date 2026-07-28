@@ -5,114 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lokesh Singh Shahi - Video Editor & Creative Designer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for lightweight interactivity and scroll animations -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: #FFFFFF;
-            background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0);
-            background-size: 25px 25px;
-            color: #1F2937;
-        }
-        .btn-primary {
-            background-color: #FBD784;
-            color: #111111;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            border-radius: 0.5rem;
-        }
-        .btn-primary:hover {
-            background-color: #FFDDA3;
-            transform: translateY(-2px);
-        }
-        .section-title {
-            color: #111827;
-            font-weight: 700;
-        }
-        .section-subtitle {
-            color: #4B5563;
-        }
-        .header {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #E5E7EB;
-        }
-        .portfolio-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: 1rem;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            overflow: hidden;
-        }
-        .portfolio-card:hover {
-            transform: translateY(-8px);
-            border-color: #FBD784;
-        }
-        .skill-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .skill-card:hover {
-            transform: translateY(-4px);
-            border-color: #FBD784;
-        }
-        .nav-link {
-            color: #4B5563;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-        .nav-link:hover {
-            color: #111827;
-        }
-        .highlight-title {
-            font-family: 'Patrick Hand', cursive;
-            background-color: #FFC8DD;
-            padding: 0.25rem 1rem;
-            border-radius: 0.25rem;
-            font-weight: 400;
+        :root {
+            --primary-dark: #0f172a;
+            --accent: #f59e0b;
         }
 
-        /* Infinite Scroll Animation */
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #FAFAFA;
+            color: var(--primary-dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .heading-font {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Subtle background pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.05) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-dark);
+            color: #FFFFFF;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary-dark);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(15, 23, 42, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .header {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link {
+            position: relative;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, #0f172a, #334155);
+        }
+        
+        .text-gradient-accent {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        /* Enhanced Infinite Scroll Animation */
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(calc(-350px * 12 - 2rem * 12)); }
+        }
+        
+        @media (min-width: 768px) {
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-450px * 12 - 2rem * 12)); }
+            }
         }
 
         .portfolio-container {
             width: 100%;
             overflow: hidden;
             position: relative;
+            padding: 2rem 0;
+        }
+
+        /* Gradient mask for smooth edges */
+        .portfolio-container::before,
+        .portfolio-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .portfolio-container::before {
+            left: 0;
+            background: linear-gradient(to right, #FAFAFA, transparent);
+        }
+        
+        .portfolio-container::after {
+            right: 0;
+            background: linear-gradient(to left, #FAFAFA, transparent);
         }
 
         .scrolling-wrapper {
             display: flex;
             width: fit-content;
-            animation: scroll 100s linear infinite;
-            padding-bottom: 20px;
+            animation: scroll 60s linear infinite;
+            gap: 2rem;
+            padding-left: 2rem; /* Initial offset */
         }
 
         .portfolio-container:hover .scrolling-wrapper {
             animation-play-state: paused;
         }
 
-        /* Support for manual scroll via JS while maintaining animation */
-        .scrolling-wrapper-outer {
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .scrolling-wrapper-outer::-webkit-scrollbar {
-            display: none;
-        }
-
         .portfolio-item {
             flex: 0 0 auto;
             width: 350px;
-            padding: 1rem;
         }
         @media (min-width: 768px) {
             .portfolio-item {
@@ -120,140 +198,282 @@
             }
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Timeline specific */
+        .timeline-dot {
+            transition: all 0.3s ease;
+        }
+        .group:hover .timeline-dot {
+            background-color: var(--accent);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-pattern antialiased" x-data="{ mobileMenuOpen: false }">
 
     <!-- Header & Navigation -->
-    <header class="header sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold section-title">Lokesh Shahi</a>
-            <div class="hidden md:flex space-x-8 items-center">
+    <header class="header fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900 heading-font tracking-tight flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-gray-900 text-white flex items-center justify-center text-sm">LS</span>
+                Lokesh Shahi
+            </a>
+            <div class="hidden md:flex space-x-10 items-center">
                 <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#skills" class="nav-link">Expertise</a>
+                <a href="#portfolio" class="nav-link">Work</a>
                 <a href="#experience" class="nav-link">Experience</a>
-                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <a href="mailto:lokeshshahi8899@gmail.com" class="hidden md:block border border-gray-300 text-gray-800 px-5 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">Email Me</a>
+            <a href="#contact" class="hidden md:block btn-primary px-6 py-2.5 rounded-full font-semibold text-sm">Let's Talk</a>
+            
+            <!-- Mobile Menu Toggle -->
             <div class="md:hidden">
-                 <button id="menu-btn" class="text-gray-800 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-800 focus:outline-none p-2">
+                    <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg x-show="mobileMenuOpen" style="display: none;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white z-[60] p-6">
-        <div class="flex justify-end">
-            <button id="close-btn" class="text-gray-800 text-3xl">&times;</button>
-        </div>
-        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl font-semibold">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#portfolio" class="nav-link">Portfolio</a>
-            <a href="#experience" class="nav-link">Experience</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <a href="mailto:lokeshshahi8899@gmail.com" class="mt-4 btn-primary px-8 py-3">Email Me</a>
-        </div>
+    <!-- Mobile Menu Overlay -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-full"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-full"
+         class="fixed inset-0 z-40 bg-white/95 backdrop-blur-md pt-24 pb-6 px-6 md:hidden flex flex-col items-center justify-center space-y-8" style="display: none;">
+        <a @click="mobileMenuOpen = false" href="#about" class="text-2xl font-bold text-gray-800 hover:text-amber-500 transition-colors">About</a>
+        <a @click="mobileMenuOpen = false" href="#skills" class="text-2xl font-bold text-gray-800 hover:text-amber-500 transition-colors">Expertise</a>
+        <a @click="mobileMenuOpen = false" href="#portfolio" class="text-2xl font-bold text-gray-800 hover:text-amber-500 transition-colors">Work</a>
+        <a @click="mobileMenuOpen = false" href="#experience" class="text-2xl font-bold text-gray-800 hover:text-amber-500 transition-colors">Experience</a>
+        <a @click="mobileMenuOpen = false" href="#contact" class="mt-8 btn-primary px-8 py-3 rounded-full w-full max-w-xs text-center text-lg">Let's Talk</a>
     </div>
 
-
-    <main>
+    <main class="pt-20">
         <!-- Hero Section -->
-        <section class="py-24 md:py-32">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-center md:text-left">
-                    <p class="font-semibold text-lg text-yellow-500">Lokesh Singh Shahi</p>
-                    <h1 class="text-4xl md:text-6xl section-title leading-tight mt-2">
-                        Creative Video Editor & Designer
+        <section class="min-h-[90vh] flex items-center py-12 md:py-20 relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute top-20 right-10 w-64 h-64 bg-amber-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 0s;"></div>
+            <div class="absolute bottom-10 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+
+            <div class="container mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-10 reveal">
+                <div class="md:col-span-7 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/50 text-amber-700 text-sm font-semibold mb-6 border border-amber-200">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                        </span>
+                        Available for Projects
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-gradient leading-tight mb-6">
+                        Crafting <span class="text-gradient-accent">Visual Stories</span> That Captivate.
                     </h1>
-                    <p class="mt-6 text-lg section-subtitle max-w-lg mx-auto md:mx-0">
-                        I specialize in creating compelling visual narratives that engage, inspire, and deliver results.
+                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0 mb-10 leading-relaxed">
+                        I'm Lokesh Singh Shahi, a Creative Video Editor & Designer blending artistic vision with cutting-edge AI tools to deliver compelling digital experiences.
                     </p>
-                    <div class="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                        <a href="#portfolio" class="btn-primary font-bold py-3 px-8 text-center">See My Work</a>
-                        <a href="#contact" class="border border-gray-300 font-semibold py-3 px-8 text-center rounded-lg hover:bg-gray-50 transition-colors">Contact Me</a>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                        <a href="#portfolio" class="btn-primary py-4 px-8 rounded-full font-bold text-center flex items-center justify-center gap-2 group">
+                            Explore Work
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        <a href="#contact" class="btn-secondary py-4 px-8 rounded-full font-bold text-center">Get in Touch</a>
                     </div>
                 </div>
-                <div class="p-4 flex justify-center">
-                     <div class="relative w-full max-w-md">
-                        <img src="photo_lokesh.jpeg" onerror="this.src='https://placehold.co/600x800/E5E7EB/1F2937?text=Lokesh+Shahi'" alt="Lokesh Singh Shahi" class="rounded-2xl w-full h-auto object-cover shadow-2xl">
-                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+                
+                <div class="md:col-span-5 flex justify-center mt-10 md:mt-0 relative">
+                     <div class="relative w-full max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl group">
+                        <img src="photo_lokesh.jpeg" onerror="this.src='https://placehold.co/800x1000/1e293b/FFFFFF?text=Lokesh+Shahi'" alt="Lokesh Singh Shahi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="font-bold text-xl">Lokesh Shahi</p>
+                            <p class="text-sm opacity-80">Dehradun, India</p>
+                        </div>
+                     </div>
+                     <!-- Floating badges -->
+                     <div class="absolute -right-6 top-1/4 glass-card px-4 py-3 rounded-2xl animate-float" style="animation-delay: 1s;">
+                         <div class="flex items-center gap-3">
+                             <span class="text-2xl">🎬</span>
+                             <div>
+                                 <p class="font-bold text-sm text-gray-900">50M+ Views</p>
+                                 <p class="text-xs text-gray-500">Generated</p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="absolute -left-6 bottom-1/4 glass-card px-4 py-3 rounded-2xl animate-float" style="animation-delay: 2.5s;">
+                         <div class="flex items-center gap-3">
+                             <span class="text-2xl">✨</span>
+                             <div>
+                                 <p class="font-bold text-sm text-gray-900">2K+ Videos</p>
+                                 <p class="text-xs text-gray-500">Delivered</p>
+                             </div>
+                         </div>
                      </div>
                 </div>
             </div>
         </section>
         
         <!-- About Section -->
-        <section id="about" class="py-24 bg-pink-50">
-             <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">About Me</span></h2>
-                    <p class="mt-8 max-w-3xl mx-auto section-subtitle text-lg leading-relaxed">
-                        With a Bachelor of Science in Animation and Gaming, I have a deep-rooted passion for visual storytelling. My expertise lies in video editing and graphic design, where I merge technical proficiency with a keen artistic eye. I am dedicated to producing high-quality, impactful content and am always exploring new technologies, including AI, to push the boundaries of creativity.
-                    </p>
+        <section id="about" class="py-24 bg-white relative">
+            <div class="container mx-auto px-6 reveal">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase mb-3 text-center">About Me</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold text-center mb-10 heading-font">The Mind Behind the Edits</h3>
+                    
+                    <div class="glass-card rounded-[2rem] p-8 md:p-12 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-bl-[100px] -z-10"></div>
+                        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-6">
+                            Holding a Bachelor of Science in Animation and Gaming, my journey is driven by a profound passion for visual storytelling. I specialize in bridging the gap between raw footage and compelling narratives through expert video editing and motion graphics.
+                        </p>
+                        <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+                            Beyond traditional methods, I am deeply invested in leveraging <strong class="text-gray-900">AI-driven technologies</strong> to optimize workflows and create previously unimaginable visuals. Whether it's crafting a high-retention social media reel or a sophisticated promotional campaign, my goal is always to deliver impact.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">My Capabilities</span></h2>
-                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">A look into the primary tools and technologies I use to bring ideas to life.</p>
+        <!-- Skills & AI Tools Section -->
+        <section id="skills" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6 reveal">
+                <div class="text-center mb-16">
+                    <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase mb-3">Expertise</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold heading-font">My Creative Arsenal</h3>
                 </div>
                 
-                <div class="mt-16">
-                    <h3 class="text-2xl font-bold section-title text-center mb-8">Creative Software</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="photoshop.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg'" alt="Photoshop" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title text-sm">Photoshop</span>
+                <!-- Core Software -->
+                <div class="mb-20">
+                    <h4 class="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+                        <span class="w-8 h-px bg-gray-300"></span>
+                        Industry Standards
+                        <span class="w-8 h-px bg-gray-300 flex-grow"></span>
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+                        <!-- Skill items with modernized design -->
+                        <div class="glass-card flex flex-col items-center justify-center p-6 rounded-2xl group hover:bg-white">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <img src="premiere-pro_5968525.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg'" alt="Premiere Pro" class="w-full h-full object-contain filter drop-shadow-md">
+                            </div>
+                            <span class="font-bold text-sm text-gray-800">Premiere Pro</span>
                         </div>
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="premiere-pro_5968525.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg'" alt="Premiere Pro" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title text-sm">Premiere Pro</span>
+                        <div class="glass-card flex flex-col items-center justify-center p-6 rounded-2xl group hover:bg-white">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <img src="after-effects.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg'" alt="After Effects" class="w-full h-full object-contain filter drop-shadow-md">
+                            </div>
+                            <span class="font-bold text-sm text-gray-800">After Effects</span>
                         </div>
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="after-effects.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-plain.svg'" alt="After Effects" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title text-sm">After Effects</span>
+                        <div class="glass-card flex flex-col items-center justify-center p-6 rounded-2xl group hover:bg-white">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <img src="photoshop.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg'" alt="Photoshop" class="w-full h-full object-contain filter drop-shadow-md">
+                            </div>
+                            <span class="font-bold text-sm text-gray-800">Photoshop</span>
                         </div>
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="illustrator_5611037.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg'" alt="Illustrator" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title text-sm">Illustrator</span>
+                        <div class="glass-card flex flex-col items-center justify-center p-6 rounded-2xl group hover:bg-white">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <img src="illustrator_5611037.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg'" alt="Illustrator" class="w-full h-full object-contain filter drop-shadow-md">
+                            </div>
+                            <span class="font-bold text-sm text-gray-800">Illustrator</span>
                         </div>
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="maya.png" onerror="this.src='https://placehold.co/48x48/1F2937/FFFFFF?text=Maya'" alt="Maya" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title text-sm">Autodesk Maya</span>
+                        <div class="glass-card flex flex-col items-center justify-center p-6 rounded-2xl group hover:bg-white">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <img src="maya.png" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg'" alt="Maya" class="w-full h-full object-contain filter drop-shadow-md">
+                            </div>
+                            <span class="font-bold text-sm text-gray-800">Maya</span>
                         </div>
-                         <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <img src="3dx.png" onerror="this.src='https://placehold.co/48x48/1F2937/FFFFFF?text=3DS'" alt="3ds Max" class="h-12 w-12 object-contain">
-                            <span class="font-semibold section-title text-sm">3ds Max</span>
+                        <div class="glass-card flex flex-col items-center justify-center p-6 rounded-2xl group hover:bg-white">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <svg viewBox="0 0 128 128" class="w-full h-full text-blue-600"><path fill="currentColor" d="M37.9 76.5l3.2 2.3c2.7-3.9 6.8-6.1 11.4-6.1h.7c7 0 12 4.4 12 10.9 0 4.1-1.8 7.3-4.8 9-2.2 1.3-4.9 2-7.8 2-6.5 0-11.7-2.9-14.7-8.3l-3.3 2.1c3.5 6 9.3 9.4 17.8 9.4h.3c8.9 0 16-5 16-12.7 0-6.9-4.7-12-11.6-13.4v-.2c5.8-1.5 9.7-6.1 9.7-11.7 0-6.6-5.8-11.1-13.9-11.1-7.7 0-13 3.6-15.6 9l3.3 1.9c2-4.5 6.3-7.3 12.1-7.3 5.9 0 10.3 3.3 10.3 8.3 0 5-4.2 8.7-10 8.7h-3.4v3.4h3.6c6.5 0 11.2 4.1 11.2 9.8 0 5.8-5.1 9.8-12.6 9.8h-.2c-6.8 0-11.3-2.6-13.7-5.8z"/><path fill="currentColor" d="M79.2 59c0 6.6 3.1 11.2 8.1 13.9v.2c-5.8 2.7-9.5 7.8-9.5 15.3 0 11.2 8.1 17.5 17.5 17.5h.3c9.3 0 17.4-6.3 17.4-17.5 0-7.3-3.6-12.3-9.1-15.1v-.2c4.8-2.5 7.7-7 7.7-13.3 0-9.8-7.3-15.6-16-15.6h-.2c-8.8 0-16.2 5.9-16.2 14.8zm16.1-11.5c7 0 12.3 4.6 12.3 11.9 0 7-5.1 11.7-12.4 11.7h-.3c-7.2 0-12.2-4.7-12.2-11.7-.1-7.2 5.3-11.9 12.6-11.9zm.3 28.5c7.9 0 13.7 5.2 13.7 13.6s-5.8 14.2-13.7 14.2h-.3c-7.9 0-13.8-5.7-13.8-14.2s5.8-13.6 14.1-13.6z"/><path fill="currentColor" d="M37.7 75.3v39.4h-3.9V75.3h3.9z"/></svg>
+                            </div>
+                            <span class="font-bold text-sm text-gray-800">3ds Max</span>
                         </div>
                     </div>
                 </div>
 
-                 <div class="mt-16">
-                    <h3 class="text-2xl font-bold section-title text-center mb-8">AI & Generative Tools</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <div class="h-12 w-12 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold">GPT</div>
-                            <span class="font-semibold section-title">ChatGPT</span>
+                <!-- Expanded AI Tools Section -->
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+                        <span class="w-8 h-px bg-gray-300"></span>
+                        AI & Generative Workflows
+                        <span class="w-8 h-px bg-gray-300 flex-grow"></span>
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- AI Tool Card 1 -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform">GPT</div>
+                            <h5 class="font-bold text-lg mb-2">ChatGPT</h5>
+                            <p class="text-sm text-gray-600">Scriptwriting, concept ideation, and workflow automation.</p>
                         </div>
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <div class="h-12 w-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">GEM</div>
-                            <span class="font-semibold section-title">Google Gemini</span>
+                        
+                        <!-- AI Tool Card 2 -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform">MJ</div>
+                            <h5 class="font-bold text-lg mb-2">Midjourney</h5>
+                            <p class="text-sm text-gray-600">Generating high-fidelity storyboards and conceptual art assets.</p>
                         </div>
-                        <div class="skill-card flex flex-col items-center justify-center space-y-3">
-                            <div class="h-12 w-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">VEO</div>
-                            <span class="font-semibold section-title">Google Veo</span>
+                        
+                        <!-- AI Tool Card 3 -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-fuchsia-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-purple-600/30 group-hover:scale-110 transition-transform text-xs">VEO</div>
+                            <h5 class="font-bold text-lg mb-2">Google Veo / Sora</h5>
+                            <p class="text-sm text-gray-600">Exploring advanced generative video for B-roll and vfx bases.</p>
+                        </div>
+                        
+                        <!-- AI Tool Card 4 -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-red-50 to-orange-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-red-500/30 group-hover:scale-110 transition-transform text-xs">11L</div>
+                            <h5 class="font-bold text-lg mb-2">ElevenLabs</h5>
+                            <p class="text-sm text-gray-600">Creating natural-sounding voiceovers and audio elements.</p>
+                        </div>
+                        
+                         <!-- AI Tool Card 5 -->
+                         <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-pink-50 to-rose-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-pink-500/30 group-hover:scale-110 transition-transform text-xs">RW</div>
+                            <h5 class="font-bold text-lg mb-2">Runway Gen-2</h5>
+                            <p class="text-sm text-gray-600">Video-to-video transformations and generative edits.</p>
+                        </div>
+                        
+                        <!-- AI Tool Card 6 -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-amber-600 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-amber-600/30 group-hover:scale-110 transition-transform text-xs">CLA</div>
+                            <h5 class="font-bold text-lg mb-2">Claude (Anthropic)</h5>
+                            <p class="text-sm text-gray-600">Advanced reasoning and nuanced tone for scripting and ideation.</p>
+                        </div>
+
+                        <!-- AI Tool Card 7 -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-cyan-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-indigo-600/30 group-hover:scale-110 transition-transform text-xs">HF</div>
+                            <h5 class="font-bold text-lg mb-2">Higgsfield.ai</h5>
+                            <p class="text-sm text-gray-600">Highly controllable AI video generation and dynamic camera motions.</p>
+                        </div>
+                        
+                        <!-- AI Tool Card 8 (Native AI) -->
+                        <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 to-amber-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                            <div class="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-yellow-500/30 group-hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <h5 class="font-bold text-lg mb-2">Native AI Integrations</h5>
+                            <p class="text-sm text-gray-600">Leveraging Premiere Pro's Auto Ducking and AE's Roto Brush 3.</p>
                         </div>
                     </div>
                 </div>
@@ -261,291 +481,229 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="py-24 bg-pink-50 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Latest Works</span></h2>
-                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">Automatic infinite scroll restored. You can also use your mouse wheel to explore.</p>
+        <section id="portfolio" class="py-24 bg-white overflow-hidden">
+            <div class="container mx-auto px-6 reveal">
+                <div class="text-center mb-10">
+                    <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase mb-3">Selected Works</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold heading-font">Visual Narratives</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-500">Scroll horizontally or let it play automatically.</p>
                 </div>
             </div>
             
-            <div class="mt-16 portfolio-container">
+            <div class="portfolio-container reveal" id="portfolio-container-el">
                 <div class="scrolling-wrapper" id="portfolio-scroll">
-                    <!-- Complete Set (Items 1-12) -->
-                    <!-- 1. Viral YT Short 1 -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/Qedxs7BpIQA?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg" alt="YouTube Short" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Short Form Content</h3>
-                                <p class="mt-1 text-sm section-subtitle">Dynamic vertical video editing.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 2. Viral YT Short 2 -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/b6aTsgl7yq0?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg" alt="YouTube Short" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Social Media Reel</h3>
-                                <p class="mt-1 text-sm section-subtitle">Fast-paced storytelling for mobile.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 3. Viral FB Reel 1.4M -->
-                    <div class="portfolio-item">
-                        <a href="https://www.facebook.com/share/v/185wkttvKA/" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-blue-600 flex items-center justify-center overflow-hidden relative">
-                                <img src="https://placehold.co/600x400/1877F2/FFFFFF?text=1.4M+Views+Viral+Reel" alt="Viral FB Reel" class="w-full h-full object-cover">
-                                <div class="absolute top-2 right-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded">1.4M VIEWS</div>
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Viral FB Reel</h3>
-                                <p class="mt-1 text-sm section-subtitle">Mother of Sarcasm - High Retention.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 4. Viral YT Video -->
-                    <div class="portfolio-item">
-                        <a href="https://youtu.be/jVitswVkZHg" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg" alt="YouTube Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Promotional Project</h3>
-                                <p class="mt-1 text-sm section-subtitle">Professional high-quality production.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 5. FB Reel 42K -->
-                    <div class="portfolio-item">
-                        <a href="https://www.facebook.com/share/v/1AbGBsBQny/" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-blue-500">
-                                <img src="https://placehold.co/600x400/4267B2/FFFFFF?text=Viral+Social+Content" alt="Facebook Reel" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Organic Growth Reel</h3>
-                                <p class="mt-1 text-sm section-subtitle">Comedic timing & audio sync.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 6. YT Short 3 -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/w7uVnSw69xA?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg" alt="YouTube Short" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Creative Short</h3>
-                                <p class="mt-1 text-sm section-subtitle">Engaging visual sequences.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 7. Original Motion Graphics Reel -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/ASeT6IbiOXE?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" alt="Motion Graphics" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Motion Graphics Reel</h3>
-                                <p class="mt-1 text-sm section-subtitle">Dynamic graphics compilation.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 8. Original Animated Explainer -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/YFn4oeAsE5U?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" alt="Animated Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Animated Explainer</h3>
-                                <p class="mt-1 text-sm section-subtitle">Storytelling via animation.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 9. Social Media Ad -->
-                    <div class="portfolio-item">
-                        <a href="https://youtu.be/g_YieLNVSxI" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" alt="Social Media Ad" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Social Media Ad</h3>
-                                <p class="mt-1 text-sm section-subtitle">Short-form campaign ad.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 10. Promo Video -->
-                    <div class="portfolio-item">
-                        <a href="https://youtu.be/x8iC_JxC0G0" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" alt="Promo Video" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Promotional Video</h3>
-                                <p class="mt-1 text-sm section-subtitle">Client campaign content.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 11. Short Form Vertical -->
-                    <div class="portfolio-item">
-                        <a href="https://youtube.com/shorts/BmHnpgCjcXs?feature=share" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" alt="Short Form" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Vertical Content</h3>
-                                <p class="mt-1 text-sm section-subtitle">Engaging mobile video.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 12. Client Commercial -->
-                    <div class="portfolio-item">
-                        <a href="https://youtu.be/MsVTqhsbXCo" target="_blank" class="block group portfolio-card h-full">
-                            <div class="aspect-video bg-gray-200">
-                                <img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" alt="Commercial" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 bg-white">
-                                <h3 class="text-lg font-bold section-title">Client Commercial</h3>
-                                <p class="mt-1 text-sm section-subtitle">Commercial spot production.</p>
-                            </div>
-                        </a>
-                    </div>
+                    
+                    <!-- Portfolio Item Wrapper Function for cleaner HTML -->
+                    <script>
+                        const portfolioItems = [
+                            { url: 'https://youtube.com/shorts/AnEBTJlThdU', img: 'https://img.youtube.com/vi/AnEBTJlThdU/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/AnEBTJlThdU/hqdefault.jpg', title: 'Engaging Short Content', tag: 'YouTube Shorts' },
+                            { url: 'https://youtu.be/EpnbXOPh5Bg', img: 'https://img.youtube.com/vi/EpnbXOPh5Bg/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/EpnbXOPh5Bg/hqdefault.jpg', title: 'Cinematic Sequence', tag: 'YouTube Video' },
+                            { url: 'https://youtube.com/shorts/Qedxs7BpIQA', img: 'https://img.youtube.com/vi/Qedxs7BpIQA/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg', title: 'Dynamic Short Form', tag: 'YouTube Shorts' },
+                            { url: 'https://youtube.com/shorts/b6aTsgl7yq0', img: 'https://img.youtube.com/vi/b6aTsgl7yq0/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg', title: 'Paced Social Reel', tag: 'Instagram Reel' },
+                            { url: 'https://www.facebook.com/share/v/185wkttvKA/', img: 'https://placehold.co/800x450/1e293b/FFFFFF?text=Mother+of+Sarcasm+1.4M', thumb: 'https://placehold.co/600x400/1e293b/FFFFFF?text=1.4M+Views', title: 'Viral Comedy Edit', tag: 'FB Reel - 1.4M Views' },
+                            { url: 'https://youtu.be/jVitswVkZHg', img: 'https://img.youtube.com/vi/jVitswVkZHg/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg', title: 'High-End Promo', tag: 'Commercial' },
+                            { url: 'https://www.facebook.com/share/v/1AbGBsBQny/', img: 'https://placehold.co/800x450/1e293b/FFFFFF?text=Organic+Growth', thumb: 'https://placehold.co/600x400/1e293b/FFFFFF?text=42K+Views', title: 'Organic Growth Clip', tag: 'FB Reel - 42K Views' },
+                            { url: 'https://youtube.com/shorts/w7uVnSw69xA', img: 'https://img.youtube.com/vi/w7uVnSw69xA/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg', title: 'Visual Sequences', tag: 'Creative Short' },
+                            { url: 'https://youtube.com/shorts/ASeT6IbiOXE', img: 'https://img.youtube.com/vi/ASeT6IbiOXE/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg', title: 'Motion Graphics Mix', tag: 'MoGraph Reel' },
+                            { url: 'https://youtube.com/shorts/YFn4oeAsE5U', img: 'https://img.youtube.com/vi/YFn4oeAsE5U/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg', title: 'Animated Story', tag: 'Explainer' },
+                            { url: 'https://youtu.be/g_YieLNVSxI', img: 'https://img.youtube.com/vi/g_YieLNVSxI/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg', title: 'Campaign Ad', tag: 'Social Media' },
+                            { url: 'https://youtu.be/x8iC_JxC0G0', img: 'https://img.youtube.com/vi/x8iC_JxC0G0/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg', title: 'Client Promotion', tag: 'Promotional' },
+                            { url: 'https://youtube.com/shorts/BmHnpgCjcXs', img: 'https://img.youtube.com/vi/BmHnpgCjcXs/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg', title: 'Mobile Optimization', tag: 'Vertical Video' },
+                            { url: 'https://youtu.be/MsVTqhsbXCo', img: 'https://img.youtube.com/vi/MsVTqhsbXCo/maxresdefault.jpg', thumb: 'https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg', title: 'Commercial Spot', tag: 'Client Work' }
+                        ];
 
-                    <!-- DUPLICATED SET FOR INFINITE SCROLL -->
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/Qedxs7BpIQA/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Short Form Content</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/b6aTsgl7yq0/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Social Media Reel</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden relative"><img src="https://placehold.co/600x400/1877F2/FFFFFF?text=1.4M+Views" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Viral FB Reel</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/jVitswVkZHg/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Promotional Project</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://placehold.co/600x400/4267B2/FFFFFF?text=Viral+Social" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Organic Growth Reel</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/w7uVnSw69xA/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Creative Short</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/ASeT6IbiOXE/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Motion Graphics Reel</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/YFn4oeAsE5U/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Animated Explainer</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/g_YieLNVSxI/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Social Media Ad</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/x8iC_JxC0G0/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Promotional Video</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/BmHnpgCjcXs/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Vertical Content</h3></div></div></div>
-                    <div class="portfolio-item"><div class="portfolio-card h-full overflow-hidden"><img src="https://img.youtube.com/vi/MsVTqhsbXCo/hqdefault.jpg" class="w-full aspect-video object-cover"><div class="p-5"><h3 class="font-bold">Client Commercial</h3></div></div></div>
+                        function createCard(item) {
+                            return `
+                            <div class="portfolio-item">
+                                <a href="${item.url}" target="_blank" class="block group relative rounded-[2rem] overflow-hidden bg-gray-900 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                                    <div class="aspect-[16/10] overflow-hidden relative">
+                                        <!-- Image fallback logic using a small script ensures maxresdefault falls back to hqdefault if missing -->
+                                        <img src="${item.img}" onerror="this.onerror=null; this.src='${item.thumb}';" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100">
+                                        
+                                        <!-- Overlay gradient -->
+                                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300"></div>
+                                        
+                                        <!-- Play button overlay -->
+                                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-50 group-hover:scale-100">
+                                            <div class="w-16 h-16 rounded-full bg-amber-500/90 text-white flex items-center justify-center backdrop-blur-sm">
+                                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                                        <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold text-white mb-3 tracking-wider">
+                                            ${item.tag}
+                                        </span>
+                                        <h3 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">${item.title}</h3>
+                                    </div>
+                                </a>
+                            </div>`;
+                        }
+
+                        // Generate cards twice for seamless looping
+                        const wrapper = document.getElementById('portfolio-scroll');
+                        let html = '';
+                        portfolioItems.forEach(item => html += createCard(item));
+                        portfolioItems.forEach(item => html += createCard(item)); // Duplicate set
+                        wrapper.innerHTML = html;
+                    </script>
                 </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl section-title"><span class="highlight-title">Experience</span></h2>
-                    <p class="mt-4 max-w-2xl mx-auto section-subtitle">My professional background and key accomplishments.</p>
+        <section id="experience" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6 reveal">
+                <div class="text-center mb-16">
+                    <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase mb-3">Career</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold heading-font">Professional Journey</h3>
                 </div>
-                <div class="mt-16 max-w-3xl mx-auto space-y-12">
-                    <div class="flex items-start space-x-6 group">
-                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">01</div>
-                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
-                            <h3 class="text-xl font-bold section-title">Divinetalk</h3>
-                            <p class="font-semibold text-gray-500">Video Editor & Motion Graphics Artist <span class="text-gray-400 font-normal">| 2024 - Present</span></p>
-                            <p class="mt-3 text-base section-subtitle">Leading video production and motion graphics to enhance digital presence. Managed high-engagement social media campaigns and long-form video content.</p>
-                             <div class="mt-5 flex items-center space-x-4">
-                                <a href="https://www.youtube.com/@divinetalkastrology" target="_blank" class="text-gray-400 hover:text-red-600 transition-colors">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M21.522 6.337a2.502 2.502 0 00-1.76-1.76C18.264 4 12 4 12 4s-6.264 0-7.762.577a2.502 2.502 0 00-1.76 1.76C2 7.835 2 12 2 12s0 4.165.478 5.663a2.502 2.502 0 001.76 1.76C5.736 19.998 12 20 12 20s6.264 0 7.762-.577a2.502 2.502 0 001.76-1.76c.478-1.498.478-5.663.478-5.663s0-4.165-.478-5.663zM9.75 15.5V8.5l6 3.5-6 3.5z"></path></svg>
+                
+                <div class="max-w-4xl mx-auto relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent">
+                    
+                    <!-- Exp Item 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active mb-12">
+                        <!-- Icon -->
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-50 bg-gray-900 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <!-- Content -->
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-gray-200">
+                            <div class="flex flex-col sm:flex-row items-start justify-between mb-2">
+                                <h4 class="text-xl font-bold text-gray-900">Divinetalk</h4>
+                                <span class="text-sm font-semibold text-amber-600 bg-amber-100 px-3 py-1 rounded-full mt-2 sm:mt-0">2024 - Present</span>
+                            </div>
+                            <h5 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Video Editor & Motion Graphics Artist</h5>
+                            <p class="text-gray-600">Leading video production and motion graphics to enhance digital presence. Spearheading high-engagement social media campaigns and directing comprehensive long-form video content strategies.</p>
+                            
+                            <div class="mt-4 flex gap-3">
+                                <a href="https://www.youtube.com/@divinetalkastrology" target="_blank" class="w-8 h-8 rounded-full bg-red-50 text-red-600 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21.522 6.337a2.502 2.502 0 00-1.76-1.76C18.264 4 12 4 12 4s-6.264 0-7.762.577a2.502 2.502 0 00-1.76 1.76C2 7.835 2 12 2 12s0 4.165.478 5.663a2.502 2.502 0 001.76 1.76C5.736 19.998 12 20 12 20s6.264 0 7.762-.577a2.502 2.502 0 001.76-1.76c.478-1.498.478-5.663.478-5.663s0-4.165-.478-5.663zM9.75 15.5V8.5l6 3.5-6 3.5z"></path></svg>
                                 </a>
-                                <a href="https://www.instagram.com/divinetalk.in/" target="_blank" class="text-gray-400 hover:text-pink-600 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.441c-3.143 0-3.505.012-4.73.068-2.793.127-3.999 1.332-4.123 4.123-.056 1.225-.067 1.585-.067 4.73s.011 3.505.067 4.73c.124 2.791 1.33 3.996 4.123 4.123 1.225.056 1.585.067 4.73.067s3.505-.011 4.73-.067c2.791-.124 3.996-1.33 4.123-4.123.056-1.225.067-1.585.067-4.73s-.011-3.505-.067-4.73c-.127-2.793-1.332-3.999-4.123-4.123C15.505 3.616 15.143 3.604 12 3.604zm0 4.438c-2.403 0-4.36 1.957-4.36 4.36s1.957 4.36 4.36 4.36 4.36-1.957 4.36-4.36-1.957-4.36-4.36-4.36zm0 7.222c-1.583 0-2.86-1.277-2.86-2.86s1.277-2.86 2.86-2.86 2.86 1.277 2.86 2.86-1.277 2.86-2.86 2.86zm4.838-7.722c-.594 0-1.074.48-1.074 1.074s.48 1.074 1.074 1.074 1.074-.48 1.074-1.074-.48-1.074-1.074-1.074z"></path></svg>
+                                <a href="https://www.instagram.com/divinetalk.in/" target="_blank" class="w-8 h-8 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.441c-3.143 0-3.505.012-4.73.068-2.793.127-3.999 1.332-4.123 4.123-.056 1.225-.067 1.585-.067 4.73s.011 3.505.067 4.73c.124 2.791 1.33 3.996 4.123 4.123 1.225.056 1.585.067 4.73.067s3.505-.011 4.73-.067c2.791-.124 3.996-1.33 4.123-4.123.056-1.225.067-1.585.067-4.73s-.011-3.505-.067-4.73c-.127-2.793-1.332-3.999-4.123-4.123C15.505 3.616 15.143 3.604 12 3.604zm0 4.438c-2.403 0-4.36 1.957-4.36 4.36s1.957 4.36 4.36 4.36 4.36-1.957 4.36-4.36-1.957-4.36-4.36-4.36zm0 7.222c-1.583 0-2.86-1.277-2.86-2.86s1.277-2.86 2.86-2.86 2.86 1.277 2.86 2.86-1.277 2.86-2.86 2.86zm4.838-7.722c-.594 0-1.074.48-1.074 1.074s.48 1.074 1.074 1.074 1.074-.48 1.074-1.074-.48-1.074-1.074-1.074z"></path></svg>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-6 group">
-                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">02</div>
-                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
-                            <h3 class="text-xl font-bold section-title">Mother Of Sarcasm (Facebook)</h3>
-                            <p class="font-semibold text-gray-500">Social Media Video Editor <span class="text-gray-400 font-normal">| Freelance</span></p>
-                            <p class="mt-3 text-base section-subtitle">Edited multiple reel-style videos focusing on high-retention pacing, comedic timing, and trend-based audio synchronization. Achieved significant organic growth including a viral video with <strong>1.4M+ views</strong> and <strong>42K+ views</strong> on others.</p>
+                    <!-- Exp Item 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-12">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-50 bg-gray-400 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-gray-200">
+                            <div class="flex flex-col sm:flex-row items-start justify-between mb-2">
+                                <h4 class="text-xl font-bold text-gray-900">Mother Of Sarcasm</h4>
+                                <span class="text-sm font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full mt-2 sm:mt-0">Freelance</span>
+                            </div>
+                            <h5 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Social Media Video Editor</h5>
+                            <p class="text-gray-600">Engineered reel-style videos optimizing for algorithmic high-retention. Mastered comedic timing and audio synchronization, resulting in viral success including pieces with <strong class="text-gray-900">1.4M+ views</strong>.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-6 group">
-                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">03</div>
-                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
-                            <h3 class="text-xl font-bold section-title">Vertical TV</h3>
-                            <p class="font-semibold text-gray-500">Freelance Video Editor – Promotion Projects <span class="text-gray-400 font-normal">| Freelance</span></p>
-                            <p class="mt-3 text-base section-subtitle">Edited over <strong>200+ promotional videos</strong> specializing in fast-paced vertical storytelling optimized for mobile consumption. Created dynamic ad-style videos and high-impact visual sequences tailored for short-form platforms.</p>
+                    <!-- Exp Item 3 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group mb-12">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-50 bg-gray-400 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-gray-200">
+                            <div class="flex flex-col sm:flex-row items-start justify-between mb-2">
+                                <h4 class="text-xl font-bold text-gray-900">Vertical TV</h4>
+                                <span class="text-sm font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full mt-2 sm:mt-0">Freelance</span>
+                            </div>
+                            <h5 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Video Editor – Promotion Projects</h5>
+                            <p class="text-gray-600">Delivered over <strong class="text-gray-900">200+ promotional videos</strong>. Specialized in dynamic, fast-paced vertical storytelling specifically tailored for ad placements and mobile consumption.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-6 group">
-                        <div class="text-yellow-500 font-bold text-xl mt-1 flex-shrink-0 group-hover:scale-110 transition-transform">04</div>
-                        <div class="border-l-2 border-gray-100 pl-8 pb-4">
-                            <h3 class="text-xl font-bold section-title">My Little Genie</h3>
-                            <p class="font-semibold text-gray-500">Animation & Video Editor <span class="text-gray-400 font-normal">| 2023</span></p>
-                            <p class="mt-3 text-base section-subtitle">Managed the full production pipeline for animated content, driving social media growth through storytelling and consistent branding.</p>
+                    <!-- Exp Item 4 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="timeline-dot flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-50 bg-gray-400 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"></div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-6 rounded-2xl border border-gray-200">
+                            <div class="flex flex-col sm:flex-row items-start justify-between mb-2">
+                                <h4 class="text-xl font-bold text-gray-900">My Little Genie</h4>
+                                <span class="text-sm font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full mt-2 sm:mt-0">2023</span>
+                            </div>
+                            <h5 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Animation & Video Editor</h5>
+                            <p class="text-gray-600">Managed end-to-end production pipeline for animated content. Drove steady social media growth through narrative-driven storytelling and strict adherence to brand guidelines.</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer id="contact" class="py-24 bg-gray-900 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <div class="max-w-2xl mx-auto">
-                 <h2 class="text-3xl md:text-5xl font-bold text-white">Let's Work Together</h2>
-                 <p class="mt-6 text-lg text-gray-300">Have a project in mind? I'm available for freelance and full-time opportunities. Let's create something amazing.</p>
-                 <div class="mt-12">
-                    <a href="mailto:lokeshshahi8899@gmail.com" class="btn-primary inline-block font-bold py-4 px-12 text-lg transition-all hover:px-16">lokeshshahi8899@gmail.com</a>
-                 </div>
+    <!-- CTA / Footer -->
+    <footer id="contact" class="bg-gray-900 pt-24 pb-12 text-white relative overflow-hidden">
+        <!-- Background decorative blob -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-gradient-to-b from-amber-500/10 to-transparent blur-3xl -z-10 pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6 text-center reveal">
+            <div class="max-w-3xl mx-auto glass-card !bg-white/5 !border-white/10 rounded-[3rem] p-12 md:p-16 backdrop-blur-xl">
+                 <h2 class="text-4xl md:text-6xl font-bold text-white heading-font mb-6">Ready to create something <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">extraordinary?</span></h2>
+                 <p class="text-xl text-gray-300 mb-10">I'm currently available for freelance projects and full-time opportunities.</p>
+                 <a href="mailto:lokeshshahi8899@gmail.com" class="inline-flex items-center gap-3 bg-white text-gray-900 font-bold py-4 px-10 rounded-full text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    lokeshshahi8899@gmail.com
+                 </a>
             </div>
-            <div class="mt-20 pt-10 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-                <p>&copy; 2024 Lokesh Singh Shahi. All rights reserved.</p>
-                 <div class="flex space-x-8 mt-6 md:mt-0">
-                    <a href="https://www.linkedin.com/in/lokesh-shahi-99aaa4215/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
-                    <a href="https://www.instagram.com/3.skeleton/" target="_blank" class="hover:text-white transition-colors">Instagram</a>
-                    <a href="https://wa.me/7456834443" target="_blank" class="hover:text-white transition-colors">WhatsApp</a>
+            
+            <div class="mt-24 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+                <p>&copy; 2024 Lokesh Singh Shahi. Built with creativity.</p>
+                 <div class="flex space-x-6 mt-6 md:mt-0">
+                    <a href="https://www.linkedin.com/in/lokesh-shahi-99aaa4215/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/3.skeleton/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.441c-3.143 0-3.505.012-4.73.068-2.793.127-3.999 1.332-4.123 4.123-.056 1.225-.067 1.585-.067 4.73s.011 3.505.067 4.73c.124 2.791 1.33 3.996 4.123 4.123 1.225.056 1.585.067 4.73.067s3.505-.011 4.73-.067c2.791-.124 3.996-1.33 4.123-4.123.056-1.225.067-1.585.067-4.73s-.011-3.505-.067-4.73c-.127-2.793-1.332-3.999-4.123-4.123C15.505 3.616 15.143 3.604 12 3.604zm0 4.438c-2.403 0-4.36 1.957-4.36 4.36s1.957 4.36 4.36 4.36 4.36-1.957 4.36-4.36-1.957-4.36-4.36-4.36zm0 7.222c-1.583 0-2.86-1.277-2.86-2.86s1.277-2.86 2.86-2.86 2.86 1.277 2.86 2.86-1.277 2.86-2.86 2.86zm4.838-7.722c-.594 0-1.074.48-1.074 1.074s.48 1.074 1.074 1.074 1.074-.48 1.074-1.074-.48-1.074-1.074-1.074z"/></svg>
+                    </a>
+                    <a href="https://wa.me/7456834443" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.891-4.443 9.893-9.892.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.738-.974zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = mobileMenu.querySelectorAll('a');
-
-        function toggleMenu() {
-            mobileMenu.classList.toggle('hidden');
-            document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // threshold
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
 
-        menuBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-        navLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // Mouse Wheel Horizontal Scroll Integration
-        const scrollContainer = document.getElementById('portfolio-scroll');
-        
-        scrollContainer.addEventListener('wheel', (evt) => {
-            // Only stop default vertical scroll if user is interacting with the wheel here
-            evt.preventDefault();
-            // Manual horizontal shift when wheeling
-            scrollContainer.scrollLeft += evt.deltaY * 3;
-        }, { passive: false });
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                toggleMenu();
+        // Navbar blur effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
             }
         });
+
+        // Mouse Wheel Horizontal Scroll Integration for Portfolio
+        const scrollContainer = document.getElementById('portfolio-container-el');
+        const scrollingWrapper = document.getElementById('portfolio-scroll');
+        
+        scrollContainer.addEventListener('wheel', (evt) => {
+            // Prevent default vertical scrolling when hovering over this section
+            evt.preventDefault();
+            // We use transform for the animation, so we adjust padding to simulate scroll
+            let currentPadding = parseInt(window.getComputedStyle(scrollingWrapper).paddingLeft) || 0;
+            scrollingWrapper.style.paddingLeft = (currentPadding - evt.deltaY) + 'px';
+        }, { passive: false });
     </script>
 
 </body>
